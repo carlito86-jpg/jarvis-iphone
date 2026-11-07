@@ -213,9 +213,15 @@ function speak() {
   const italianVoices = speechSynthesis.getVoices()
     .filter(voice => voice.lang.toLowerCase().startsWith("it"));
 
-  const preferred = italianVoices.find(voice =>
-    /female|alice|elsa|silvia|paola|serena|federica/i.test(voice.name)
-  );
+  const preferred =
+  italianVoices.find(voice =>
+    /federica/i.test(voice.name) &&
+    /premium/i.test(voice.name)
+  ) ||
+  italianVoices.find(voice =>
+    /federica/i.test(voice.name)
+  ) ||
+  italianVoices[0];
 
   if (preferred) utterance.voice = preferred;
   speechSynthesis.speak(utterance);
