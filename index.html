@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="it">
 <head>
@@ -9,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="J.A.R.V.I.S.">
 <title>J.A.R.V.I.S. — Personal AI</title>
 <style>
-:root{color-scheme:dark;--bg:#050b14;--panel:#0b1725;--cyan:#69d8ff;--blue:#268dcb;--muted:#8da9bd}
+:root{color-scheme:dark;--cyan:#69d8ff;--muted:#8da9bd}
 *{box-sizing:border-box}
 body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% 38%,#102a40 0%,#071321 38%,#03070d 78%);color:#e8f7ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;justify-content:center}
 main{width:min(100%,520px);min-height:100svh;padding:calc(env(safe-area-inset-top) + 24px) 22px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column;align-items:center}
@@ -17,84 +18,248 @@ header{width:100%;display:flex;justify-content:space-between;align-items:center}
 .brand{letter-spacing:.28em;font-size:13px;color:#d9f5ff;font-weight:600}
 .status{font-size:10px;letter-spacing:.12em;color:#7ce2bc;border:1px solid #245c54;border-radius:30px;padding:7px 10px}
 .sub{margin-top:7px;font-size:10px;letter-spacing:.22em;color:#6f9ab5}
-.core-wrap{position:relative;margin:clamp(40px,10vh,90px) 0 30px;width:min(68vw,270px);aspect-ratio:1;display:grid;place-items:center}
+.core-wrap{position:relative;margin:clamp(35px,8vh,75px) 0 25px;width:min(62vw,250px);aspect-ratio:1;display:grid;place-items:center}
 .ring{position:absolute;inset:0;border:1px solid #3aa9d8;border-radius:50%;box-shadow:0 0 28px #168dc955,inset 0 0 24px #168dc922;animation:spin 22s linear infinite}
 .ring:before,.ring:after{content:"";position:absolute;inset:12px;border:1px dashed #4bc6ef77;border-radius:50%}
 .ring:after{inset:30px;border-style:solid;border-color:#2a82ae88;animation:spin 12s linear infinite reverse}
 .core{width:43%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 42% 35%,#d8faff 0%,#6bdcff 10%,#1686c9 35%,#08243d 72%,#06101c 100%);box-shadow:0 0 24px #51cfff,0 0 65px #168dce88,0 0 110px #168dce33;animation:pulse 3.4s ease-in-out infinite}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{50%{transform:scale(1.07);box-shadow:0 0 35px #51cfff,0 0 90px #168dceaa}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.07);box-shadow:0 0 35px #51cfff,0 0 90px #168dceaa}}
 h1{font-weight:400;letter-spacing:.22em;font-size:19px;margin:0}
-.tagline{font-size:12px;color:var(--muted);margin:10px 0 25px}
+.tagline{font-size:12px;color:var(--muted);margin:10px 0 22px}
 .panel{width:100%;background:linear-gradient(145deg,#102236bb,#07111ddd);border:1px solid #23435a;border-radius:18px;padding:17px;box-shadow:0 15px 50px #0005}
 .panel-label{font-size:9px;letter-spacing:.2em;color:#72c9ed;margin-bottom:12px}
-.reply{font-size:14px;line-height:1.55;color:#d9effb;min-height:44px}
+.reply{font-size:14px;line-height:1.55;color:#d9effb;min-height:44px;white-space:pre-wrap}
 .controls{width:100%;display:flex;gap:10px;margin-top:16px}
 button{font:inherit;color:#eafaff;border:1px solid #34799d;background:#0c263b;border-radius:14px;padding:14px 16px;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
 #mic{flex:1;background:linear-gradient(120deg,#12517a,#0b2941);border-color:#4ab9e8;font-weight:600}
 #speak{width:54px;font-size:18px}
-button:active{transform:scale(.98)}
 .input-row{display:flex;gap:8px;width:100%;margin-top:12px}
 input{min-width:0;flex:1;background:#081522;border:1px solid #29445a;border-radius:12px;color:white;padding:13px;font-size:14px}
 #send{padding-inline:17px}
-.hint{font-size:10px;color:#7894a8;line-height:1.5;text-align:center;margin-top:18px}
+.auth{width:100%;margin-top:16px;padding:14px;border:1px solid #23435a;border-radius:14px;background:#071321}
+.auth label{display:block;font-size:11px;color:#72c9ed;margin-bottom:9px}
+.auth-row{display:flex;gap:8px}
+.auth-row input{width:100%}
+.hint{font-size:10px;color:#7894a8;line-height:1.5;text-align:center;margin-top:16px}
 footer{margin-top:auto;padding-top:28px;color:#496b82;font-size:9px;letter-spacing:.16em}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
 <main>
-<header><div class="brand">J.A.R.V.I.S.</div><div class="status" id="status">● SISTEMA PRONTO</div></header>
+<header>
+<div class="brand">J.A.R.V.I.S.</div>
+<div class="status" id="status">● ACCESSO RICHIESTO</div>
+</header>
+
 <div class="sub">PERSONAL ARTIFICIAL INTELLIGENCE</div>
-<div class="core-wrap" aria-label="Nucleo luminoso JARVIS"><div class="ring"></div><div class="core"></div></div>
+<div class="core-wrap" aria-label="Nucleo luminoso JARVIS">
+<div class="ring"></div><div class="core"></div>
+</div>
+
 <h1>BUONGIORNO.</h1>
 <div class="tagline">Sono qui. Come posso assisterti?</div>
+
 <section class="panel">
 <div class="panel-label">MESSAGGIO DI J.A.R.V.I.S.</div>
-<div class="reply" id="reply">Buongiorno. Interfaccia inizializzata. Sono pronta a ricevere il tuo primo comando.</div>
+<div class="reply" id="reply">Sistema inizializzato. Inserisci il tuo token personale per collegarmi all'intelligenza artificiale.</div>
 </section>
+
+<div class="auth">
+<label for="token">ACCESSO PERSONALE — TOKEN JARVIS</label>
+<div class="auth-row">
+<input id="token" type="password" placeholder="Inserisci il token segreto" autocomplete="off" spellcheck="false">
+<button id="connect">Collega</button>
+</div>
+</div>
+
 <div class="controls">
 <button id="mic">🎙 PARLA CON JARVIS</button>
 <button id="speak" aria-label="Ascolta la risposta" title="Ascolta la risposta">🔊</button>
 </div>
-<div class="input-row"><input id="command" type="text" placeholder="Scrivi un comando..." autocomplete="off"><button id="send">Invia</button></div>
-<div class="hint" id="hint">Questa è la prima interfaccia dimostrativa. Il collegamento al motore AI e alla memoria verrà aggiunto nella fase successiva.</div>
-<footer>J.A.R.V.I.S. PERSONAL SYSTEM · PROTOTYPE 0.1</footer>
+
+<div class="input-row">
+<input id="command" type="text" placeholder="Scrivi un comando..." autocomplete="off">
+<button id="send">Invia</button>
+</div>
+
+<div class="hint">Il token resta temporaneamente in memoria durante questa sessione. Non viene salvato nel sito o nel repository GitHub. Il microfono dipende dal supporto del browser.</div>
+<footer>J.A.R.V.I.S. PERSONAL SYSTEM · AI PROTOTYPE 0.2</footer>
 </main>
+
 <script>
-const reply=document.getElementById('reply'), statusEl=document.getElementById('status'), input=document.getElementById('command');
-function answer(text){reply.textContent=text; statusEl.textContent='● PRONTA';}
-function respond(raw){
- const q=raw.trim(); if(!q)return;
- const s=q.toLowerCase();
- if(/ciao|buongiorno|buonasera/.test(s)) answer('Buongiorno. È un piacere sentirti. Da dove desideri iniziare?');
- else if(/chi sei|presentati/.test(s)) answer('Sono J.A.R.V.I.S., la tua assistente personale. Elegante, precisa e, quando serve, dotata di un impeccabile senso dell’ironia.');
- else if(/ora|orario/.test(s)) answer('Posso aiutarti con l’organizzazione del tempo. Per l’orario esatto, consulta l’orologio del tuo iPhone.');
- else if(/aiuto|cosa sai fare/.test(s)) answer('Per ora posso mostrarti l’interfaccia e provare la conversazione vocale. Nelle prossime fasi collegheremo il motore AI, la memoria e le automazioni.');
- else answer('Comando ricevuto: “'+q+'”. Il mio motore AI non è ancora collegato. Questo sarà il prossimo passo del progetto.');
+const ENDPOINT = "https://jarvis-brain.carlito86.workers.dev/";
+const replyEl = document.getElementById("reply");
+const statusEl = document.getElementById("status");
+const input = document.getElementById("command");
+const tokenInput = document.getElementById("token");
+const sendButton = document.getElementById("send");
+const connectButton = document.getElementById("connect");
+
+let accessToken = "";
+let busy = false;
+let history = [];
+
+function show(text) {
+  replyEl.textContent = text;
 }
-document.getElementById('send').addEventListener('click',()=>{respond(input.value);input.value='';});
-input.addEventListener('keydown',e=>{if(e.key==='Enter'){respond(input.value);input.value='';}});
-function speak(){
- const text=reply.textContent;
- if(!('speechSynthesis' in window)){answer(text+' (La sintesi vocale non è disponibile in questo browser.)');return;}
- speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);u.lang='it-IT';u.rate=.96;u.pitch=1.08;
- const voices=speechSynthesis.getVoices();
- const italian=voices.filter(v=>v.lang.toLowerCase().startsWith('it'));
- const femaleHint=italian.find(v=>/female|alice|elsa|silvia|paola|serena|federica/i.test(v.name));
- if(femaleHint)u.voice=femaleHint;
- speechSynthesis.speak(u);
+
+function setStatus(text) {
+  statusEl.textContent = "● " + text;
 }
-document.getElementById('speak').addEventListener('click',speak);
-document.getElementById('mic').addEventListener('click',()=>{
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SR){answer('Il riconoscimento vocale diretto non è disponibile qui. Puoi usare il microfono della tastiera iPhone oppure scrivere il comando.');return;}
- const rec=new SR();rec.lang='it-IT';rec.interimResults=false;rec.maxAlternatives=1;
- statusEl.textContent='● TI ASCOLTO';
- rec.onresult=e=>{const t=e.results[0][0].transcript;input.value=t;respond(t);};
- rec.onerror=()=>{statusEl.textContent='● PRONTA';answer('Non sono riuscita a riconoscere la voce. Riprova oppure usa il microfono della tastiera.');};
- rec.onend=()=>{if(statusEl.textContent==='● TI ASCOLTO')statusEl.textContent='● PRONTA';};
- try{rec.start();}catch(e){statusEl.textContent='● PRONTA';answer('Per usare il microfono, consenti l’accesso quando Safari lo richiede.');}
+
+function setBusy(value) {
+  busy = value;
+  sendButton.disabled = value;
+  connectButton.disabled = value;
+}
+
+document.getElementById("connect").addEventListener("click", () => {
+  const value = tokenInput.value.trim();
+
+  if (!value) {
+    show("Inserisci il token JARVIS_ACCESS_TOKEN creato su Cloudflare.");
+    return;
+  }
+
+  accessToken = value;
+  tokenInput.value = "";
+  setStatus("TOKEN INSERITO");
+  show("Token inserito. Scrivi un messaggio per verificare il collegamento.");
+});
+
+async function respond(raw) {
+  const message = raw.trim();
+  if (!message || busy) return;
+
+  if (!accessToken) {
+    show("Prima inserisci il token personale e premi Collega.");
+    return;
+  }
+
+  setBusy(true);
+  setStatus("ELABORAZIONE");
+  show("Sto elaborando la tua richiesta...");
+
+  try {
+    const response = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + accessToken
+      },
+      body: JSON.stringify({ message, history })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        accessToken = "";
+        history = [];
+        setStatus("ACCESSO RICHIESTO");
+        throw new Error("Token non valido. Inseriscilo nuovamente.");
+      }
+      throw new Error(data.error || "Errore del servizio AI.");
+    }
+
+    if (typeof data.reply !== "string" || !data.reply.trim()) {
+      throw new Error("Risposta AI non valida.");
+    }
+
+    show(data.reply);
+    history.push({ role: "user", text: message });
+    history.push({ role: "model", text: data.reply });
+    history = history.slice(-12);
+    setStatus("PRONTA");
+  } catch (error) {
+    show("Non riesco a completare la richiesta. " + error.message);
+    if (statusEl.textContent !== "● ACCESSO RICHIESTO") {
+      setStatus("ERRORE CONNESSIONE");
+    }
+  } finally {
+    setBusy(false);
+  }
+}
+
+function send() {
+  if (busy) return;
+  const message = input.value;
+  if (!message.trim()) return;
+  input.value = "";
+  respond(message);
+}
+
+sendButton.addEventListener("click", send);
+input.addEventListener("keydown", event => {
+  if (event.key === "Enter") send();
+});
+
+function speak() {
+  if (!("speechSynthesis" in window)) {
+    show("La sintesi vocale non è disponibile in questo browser.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(replyEl.textContent);
+  utterance.lang = "it-IT";
+  utterance.rate = 0.96;
+  utterance.pitch = 1.08;
+
+  const italianVoices = speechSynthesis.getVoices()
+    .filter(voice => voice.lang.toLowerCase().startsWith("it"));
+
+  const preferred = italianVoices.find(voice =>
+    /female|alice|elsa|silvia|paola|serena|federica/i.test(voice.name)
+  );
+
+  if (preferred) utterance.voice = preferred;
+  speechSynthesis.speak(utterance);
+}
+
+document.getElementById("speak").addEventListener("click", speak);
+
+document.getElementById("mic").addEventListener("click", () => {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    show("Il riconoscimento vocale diretto non è disponibile. Puoi usare il microfono della tastiera dell'iPhone.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "it-IT";
+  recognition.interimResults = false;
+
+  setStatus("TI ASCOLTO");
+
+  recognition.onresult = event => {
+    const text = event.results[0][0].transcript;
+    input.value = text;
+    send();
+  };
+
+  recognition.onerror = () => {
+    setStatus("PRONTA");
+    show("Non sono riuscita a riconoscere la voce. Riprova.");
+  };
+
+  recognition.onend = () => {
+    if (statusEl.textContent === "● TI ASCOLTO") {
+      setStatus("PRONTA");
+    }
+  };
+
+  try {
+    recognition.start();
+  } catch {
+    setStatus("PRONTA");
+    show("Non riesco ad avviare il microfono.");
+  }
 });
 </script>
 </body>
