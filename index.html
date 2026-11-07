@@ -197,7 +197,20 @@ sendButton.addEventListener("click", send);
 input.addEventListener("keydown", event => {
   if (event.key === "Enter") send();
 });
+function mostraVoci() {
+  const voci = speechSynthesis.getVoices()
+    .filter(v => v.lang.toLowerCase().startsWith("it"));
 
+  const elenco = voci.map(v => v.name).join("\n");
+
+  alert(
+    "VOCI ITALIANE DISPONIBILI IN SAFARI:\n\n" +
+    (elenco || "Nessuna voce italiana rilevata")
+  );
+}
+
+document.getElementById("speak")
+  .addEventListener("dblclick", mostraVoci);
 function speak() {
   if (!("speechSynthesis" in window)) {
     show("La sintesi vocale non è disponibile in questo browser.");
