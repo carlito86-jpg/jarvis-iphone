@@ -78,6 +78,7 @@ footer{margin-top:auto;padding-top:28px;color:#496b82;font-size:9px;letter-spaci
 <div class="controls">
 <button id="mic">🎙 PARLA CON JARVIS</button>
 <button id="speak" aria-label="Ascolta la risposta" title="Ascolta la risposta">🔊</button>
+<button id="voices" type="button">Voci</button>
 </div>
 
 <div class="input-row">
@@ -209,8 +210,8 @@ function mostraVoci() {
   );
 }
 
-document.getElementById("speak")
-  .addEventListener("dblclick", mostraVoci);
+document.getElementById("voices")
+  .addEventListener("click", mostraVoci);
 function speak() {
   if (!("speechSynthesis" in window)) {
     show("La sintesi vocale non è disponibile in questo browser.");
