@@ -97,7 +97,25 @@ const input = document.getElementById("command");
 const tokenInput = document.getElementById("token");
 const sendButton = document.getElementById("send");
 const connectButton = document.getElementById("connect");
+let voiceReady = false;
 
+function prepareVoice() {
+  if (!("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(" ");
+  utterance.lang = "it-IT";
+  utterance.volume = 0;
+
+  speechSynthesis.speak(utterance);
+  voiceReady = true;
+}
+
+document.getElementById("mic").addEventListener(
+  "click",
+  prepareVoice
+);
 let accessToken = "";
 let busy = false;
 let history = [];
